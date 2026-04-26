@@ -10,43 +10,66 @@ extends CharacterBody3D
 
 @export var base_speed := 4.0
 @export var sprint_speed := 8.0
-@onready var camera := $CameraController/Camera3D
+@export var defend_speed := 2.0
+
+@onready var camera = $CameraController/Camera3D
+@onready var skin = $GodetteSkin
 var movment_input := Vector2.ZERO
 
+var defend := false:
+	set(value):
+		if not defend and value:
+			skin.defend(true)
+		if defend and not value:
+			skin.defend(false)
+		defend = value
 func  _physics_process(delta: float) -> void:
 	
 	move_logic(delta)
 	jump_logic(delta)
+	ability_logic()
 	move_and_slide()
 	
 func move_logic(delta: float):
-	movment_input = Input.get_vector("a","d","w","s")
+	movment_input = Input.get_vector("A","D","W","S")
 	movment_input = movment_input.rotated(-camera.global_rotation.y)
 	var vel = Vector2(velocity.x, velocity.z)
 	var speed: float = base_speed
-	if Input.is_action_pressed("left shift"):
+	if Input.is_action_pressed("Left Shift"):
 		speed = sprint_speed
+	elif defend:
+		speed = defend_speed
 	# if player is moving/movment is presses the slowly increse the player speed to max base speed
 	if movment_input != Vector2.ZERO:
 		vel += movment_input * speed * delta
 		vel = vel.limit_length(speed)
-		$GodetteSkin.set_state_machine('Running_B')
+		skin.set_state_machine('Running_B')
 		# to know where the charachter is supposed to face to
 		var target_angle = -movment_input.angle() 
 		target_angle = target_angle + PI/2 # charchter was facing with 90 degree off sate so to counter that
-		$GodetteSkin.rotation.y = rotate_toward($GodetteSkin.rotation.y, target_angle, 6.0 * delta)
+		skin.rotation.y = rotate_toward(skin.rotation.y, target_angle, 6.0 * delta)
 		
 	else:
 		# if player has stopped moving then we slowy stop them with this
 		vel = vel.move_toward(Vector2.ZERO,speed * 4.0 * delta)
-		$GodetteSkin.set_state_machine('Idle' )
+		skin.set_state_machine('Idle' )
 		
 	velocity.x = vel.x
 	velocity.z = vel.y
 func jump_logic(delta: float):
 	# this if statment make sure that no jump allowed when in the air can be modifed to be used for something like double jump
 	if is_on_floor(): 
-		if Input.is_action_just_pressed("space"):
+		if Input.is_action_just_pressed("Space"):
 			velocity.y = -jump_velocity
+	else:
+		# play animation if player is falling 
+		skin.set_state_machine('Jump_Idle' )
+
 	var gravity = jump_gravity if velocity.y > 0.0 else fall_gravity
 	velocity.y -= gravity * delta
+	
+func ability_logic():
+	if Input.is_action_just_pressed("LMB"):
+		skin.attack()
+	defend = Input.is_action_pressed('RMB')
+	
