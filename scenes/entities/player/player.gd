@@ -17,6 +17,7 @@ extends CharacterBody3D
 
 var movment_input := Vector2.ZERO
 var weapon_active := false
+var speed_modifer := 1.0
 
 var defend := false:
 	set(value):
@@ -31,8 +32,7 @@ func  _physics_process(delta: float) -> void:
 	jump_logic(delta)
 	ability_logic()
 	if Input.is_action_just_pressed('ui_accept'):
-		print("pressed")
-		skin.hit()
+		hit()
 	move_and_slide()
 	
 func move_logic(delta: float):
@@ -47,7 +47,7 @@ func move_logic(delta: float):
 	# if player is moving/movment is presses the slowly increse the player speed to max base speed
 	if movment_input != Vector2.ZERO:
 		vel += movment_input * speed * delta
-		vel = vel.limit_length(speed)
+		vel = vel.limit_length(speed) * speed_modifer
 		skin.set_state_machine('Running_B')
 		# to know where the charachter is supposed to face to
 		var target_angle = -movment_input.angle() 
@@ -79,6 +79,7 @@ func ability_logic():
 			skin.attack()
 		else:
 			skin.cast_spell()
+			stop_movement(0.3, 0.3)
 	defend = Input.is_action_pressed('RMB')
 	
 	if Input.is_action_just_pressed("Scroll Up") and not skin.attacking:
@@ -86,4 +87,13 @@ func ability_logic():
 		print("Scrolled up")
 		skin.switch_weapon(weapon_active)
 		
+
+func hit():
+	skin.hit()
+	stop_movement(0.3,0.3)
 	
+# stop player for brif moment
+func stop_movement(start_duration: float, end_duration: float):
+	var tween = create_tween()
+	tween.tween_property(self, "speed_modifer", 0.0, start_duration) # In 0.3 seconds, speed goes from 1.0 → 0.0
+	tween.tween_property(self, "speed_modifer", 1.0, end_duration)	 # In 0.8 seconds, speed goes from 0.0 → 1.0

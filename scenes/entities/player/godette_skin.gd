@@ -3,8 +3,14 @@ extends Node3D
 @onready var move_state_machine = $AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var attack_state_machine = $AnimationTree.get("parameters/AttackStateMachine/playback")
 @onready var extra_animation_node = $AnimationTree.get_tree_root().get_node("ExtraAnimation")
-
+@onready var face_material: StandardMaterial3D = $Rig/Skeleton3D/Godette_Head.get_surface_override_material(0)
 var attacking := false
+
+const faces = {
+	'defult' : Vector3.ZERO,
+	'blink' : Vector3(0.0,0.5,0.0)
+	}
+var rng = RandomNumberGenerator.new()
 
 func set_state_machine(state_name: String):
 	move_state_machine.travel(state_name)
@@ -44,3 +50,14 @@ func cast_spell():
 func hit():
 	extra_animation_node.animation = 'Hit_A'
 	$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+
+func change_face(expression):
+	face_material.uv1_offset = faces[expression]
+	
+
+func _on_blink_timer_timeout() -> void:
+	change_face('blink')
+	await get_tree().create_timer(0.2).timeout
+	change_face('defult')
+	$BlinkTimer.wait_time = rng.randf_range(1.5,3.5)

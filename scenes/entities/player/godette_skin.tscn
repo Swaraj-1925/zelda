@@ -3,9 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://bctcp65yp8t3f" path="res://graphics/characters/godette/godette.glb" id="1_jixxr"]
 [ext_resource type="Script" uid="uid://w7uk7jl5nd17" path="res://scenes/entities/player/godette_skin.gd" id="2_2vk48"]
 [ext_resource type="PackedScene" uid="uid://02ix7c6cfe1u" path="res://graphics/weapons/wand.gltf" id="3_m6bsd"]
+[ext_resource type="Texture2D" uid="uid://bgh8x0rsl78s5" path="res://graphics/characters/godette/godette_godette_faces.png" id="3_w65gf"]
 [ext_resource type="PackedScene" uid="uid://cp757r6txb0j6" path="res://graphics/weapons/sword_1handed.gltf" id="3_xjw0u"]
 [ext_resource type="Texture2D" uid="uid://cbf5176yt1e2d" path="res://graphics/weapons/barbarian_texture.png" id="4_m6bsd"]
 [ext_resource type="PackedScene" uid="uid://dydnnq3ww2uyk" path="res://graphics/weapons/shield.gltf.glb" id="5_w65gf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p240l"]
+albedo_texture = ExtResource("3_w65gf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6bsd"]
 albedo_texture = ExtResource("4_m6bsd")
@@ -88,7 +92,6 @@ states/Running_B/position = Vector2(474, 54.399998)
 transitions = ["Idle", "Running_B", SubResource("AnimationNodeStateMachineTransition_xjw0u"), "Running_B", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_m6bsd"), "Jump_Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_w65gf"), "Jump_Idle", "Running_B", SubResource("AnimationNodeStateMachineTransition_pg4gy"), "Running_B", "Idle", SubResource("AnimationNodeStateMachineTransition_p240l"), "Idle", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_q5bn8"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vuvx4")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2vk48"]
-graph_offset = Vector2(-407.15338, -38.864662)
 nodes/output/position = Vector2(656, 240)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_lv6f6")
 nodes/MoveStateMachine/position = Vector2(-720, 32)
@@ -109,7 +112,10 @@ node_connections = [&"output", 0, &"ExtraOneShot", &"AttackOneShot", 0, &"Block 
 [node name="GodetteSkin" unique_id=1213397419 instance=ExtResource("1_jixxr")]
 script = ExtResource("2_2vk48")
 
-[node name="RightHandSlot" type="BoneAttachment3D" parent="Rig/Skeleton3D" parent_id_path=PackedInt32Array(570809465) index="6" unique_id=1863306118]
+[node name="Godette_Head" parent="Rig/Skeleton3D" parent_id_path=PackedInt32Array(86621550) index="3" unique_id=1097836654]
+surface_material_override/0 = SubResource("StandardMaterial3D_p240l")
+
+[node name="RightHandSlot" type="BoneAttachment3D" parent="Rig/Skeleton3D" parent_id_path=PackedInt32Array(86621550) index="6" unique_id=1863306118]
 transform = Transform3D(-0.999999, 4.6839318e-07, 4.5731028e-07, 3.9779994e-07, -5.8875344e-07, 0.99999946, 3.9761645e-07, 0.99999946, 5.358822e-07, -0.8831323, 1.0492611, -7.2759536e-07)
 bone_name = "handslot.r"
 bone_idx = 13
@@ -126,7 +132,7 @@ visible = false
 [node name="sword_1handed" parent="Rig/Skeleton3D/RightHandSlot/sword_1handed2" index="0" unique_id=1148820845]
 surface_material_override/0 = SubResource("StandardMaterial3D_pg4gy")
 
-[node name="LeftHandSlot" type="BoneAttachment3D" parent="Rig/Skeleton3D" parent_id_path=PackedInt32Array(570809465) index="7" unique_id=34801315]
+[node name="LeftHandSlot" type="BoneAttachment3D" parent="Rig/Skeleton3D" parent_id_path=PackedInt32Array(86621550) index="7" unique_id=34801315]
 transform = Transform3D(-0.99999887, -3.9761176e-07, -3.6790345e-07, -4.658428e-07, -5.3096744e-07, 0.99999934, -4.758466e-07, 0.99999934, 6.2344856e-07, 0.88313216, 1.0492611, -6.8114986e-07)
 bone_name = "handslot.l"
 bone_idx = 8
@@ -134,7 +140,7 @@ bone_idx = 8
 [node name="shield_gltf" parent="Rig/Skeleton3D/LeftHandSlot" index="0" unique_id=2096923438 instance=ExtResource("5_w65gf")]
 transform = Transform3D(0.999935, -0.010991145, 0.0029940458, 0.010991078, 0.99993956, 1.5974045e-05, -0.0029939918, 1.707673e-05, 0.99999547, -0.014481068, 0.039540738, 0.14069852)
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=1250440841]
+[node name="AnimationPlayer" parent="." index="1" unique_id=1912268345]
 autoplay = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=1185860559]
@@ -150,6 +156,12 @@ parameters/ExtraOneShot/request = 0
 
 [node name="SecondAttackTimer" type="Timer" parent="." index="3" unique_id=1161757212]
 one_shot = true
+
+[node name="BlinkTimer" type="Timer" parent="." index="5" unique_id=1052458745]
+wait_time = 2.1
+autostart = true
+
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]
 
 [editable path="Rig/Skeleton3D/RightHandSlot/wand2"]
 [editable path="Rig/Skeleton3D/RightHandSlot/sword_1handed2"]
