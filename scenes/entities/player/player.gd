@@ -14,7 +14,9 @@ extends CharacterBody3D
 
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $GodetteSkin
+
 var movment_input := Vector2.ZERO
+var weapon_active := false
 
 var defend := false:
 	set(value):
@@ -28,6 +30,9 @@ func  _physics_process(delta: float) -> void:
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
+	if Input.is_action_just_pressed('ui_accept'):
+		print("pressed")
+		skin.hit()
 	move_and_slide()
 	
 func move_logic(delta: float):
@@ -70,6 +75,15 @@ func jump_logic(delta: float):
 	
 func ability_logic():
 	if Input.is_action_just_pressed("LMB"):
-		skin.attack()
+		if weapon_active:
+			skin.attack()
+		else:
+			skin.cast_spell()
 	defend = Input.is_action_pressed('RMB')
+	
+	if Input.is_action_just_pressed("Scroll Up") and not skin.attacking:
+		weapon_active = not weapon_active
+		print("Scrolled up")
+		skin.switch_weapon(weapon_active)
+		
 	
