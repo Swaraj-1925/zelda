@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://chmpry8o2mgse"]
+
+[ext_resource type="PackedScene" uid="uid://c16qxxd7mhpfp" path="res://graphics/characters/skeleton mage/Skeleton_Mage.glb" id="1_ghl0i"]
+
+[node name="SkeletonMageSkin" unique_id=1801751711 instance=ExtResource("1_ghl0i")]
