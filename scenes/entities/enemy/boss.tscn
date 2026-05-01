@@ -11,11 +11,27 @@ height = 6.6758423
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2poyl"]
 animation = &"2H_Melee_Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbfx1"]
+animation = &"Walking_B"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wxx3u"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbufr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3xkvp"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q043c"]
+states/Idle/node = SubResource("AnimationNodeAnimation_2poyl")
+states/Idle/position = Vector2(393.99997, 100.352)
+states/Walk/node = SubResource("AnimationNodeAnimation_xbfx1")
+states/Walk/position = Vector2(546.8, 105.59999)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_wxx3u"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_hbufr"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_3xkvp")]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_m3bvw"]
 graph_offset = Vector2(-207.2, 50.4)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_2poyl")
-nodes/Animation/position = Vector2(16, 144)
-node_connections = [&"output", 0, &"Animation"]
+nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_q043c")
+nodes/MoveStateMachine/position = Vector2(-80, 128)
+node_connections = [&"output", 0, &"MoveStateMachine"]
 
 [node name="Boss" unique_id=1600863898 instance=ExtResource("1_m3bvw")]
 script = ExtResource("2_xbfx1")
@@ -25,35 +41,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2414637, 0)
 shape = SubResource("CapsuleShape3D_xbfx1")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="NagonfordSkin" parent="." index="1" unique_id=999284715 instance=ExtResource("2_2poyl")]
+[node name="NagonfordSkin" parent="." index="1" unique_id=1052558994 instance=ExtResource("2_2poyl")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.1369481, 1.4147205, 0)
 
-[node name="Skeleton3D" parent="NagonfordSkin/Rig" parent_id_path=PackedInt32Array(999284715, 853015317) index="0" unique_id=486162260]
-bones/1/position = Vector3(0.008410764, 0.3608598, 1.2184853e-10)
+[node name="Skeleton3D" parent="NagonfordSkin/Rig" parent_id_path=PackedInt32Array(1052558994, 1023243739) index="0" unique_id=50449592]
+bones/1/position = Vector3(0.008410764, 0.36287332, 1.2184853e-10)
 bones/2/rotation = Quaternion(-0.060599465, -0.13028215, -0.007978079, 0.9895912)
-bones/3/rotation = Quaternion(0.032987423, 0.0010784935, -0.008772906, 0.99941677)
+bones/3/rotation = Quaternion(0.02912394, 0.0009521837, -0.007745428, 0.99954545)
 bones/4/position = Vector3(0.24804358, 0.110857, 0.0825816)
-bones/4/rotation = Quaternion(-0.5913065, -0.24405576, -0.712935, 0.2872581)
-bones/5/rotation = Quaternion(1.5959266e-08, -4.2319233e-08, -0.61296916, 0.7901069)
-bones/7/rotation = Quaternion(-0.14649644, -0.7022687, -0.052976023, 0.6946589)
+bones/4/rotation = Quaternion(-0.5897317, -0.244607, -0.71554077, 0.28352323)
+bones/5/rotation = Quaternion(4.2076056e-08, -5.0681354e-08, -0.6062356, 0.7952851)
+bones/7/rotation = Quaternion(-0.15204701, -0.698992, -0.05272595, 0.6967869)
 bones/8/position = Vector3(5.1384585e-10, 0.09612511, -0.057500035)
 bones/8/rotation = Quaternion(-6.2219203e-09, 4.3147903e-09, -0.7071068, 0.7071067)
 bones/9/position = Vector3(-0.17668214, 0.11170339, 0.0891542)
-bones/9/rotation = Quaternion(-0.26064938, 0.39127076, 0.8227652, 0.3194161)
-bones/10/rotation = Quaternion(1.9128093e-08, 3.6362692e-08, 0.5321497, 0.8466503)
-bones/12/rotation = Quaternion(-0.27344048, 0.18888986, -0.06119124, 0.94117296)
+bones/9/rotation = Quaternion(-0.25941843, 0.38548595, 0.82506216, 0.32152015)
+bones/10/rotation = Quaternion(2.0434783e-08, 5.7043508e-08, 0.5374385, 0.843303)
+bones/12/rotation = Quaternion(-0.26912346, 0.19311082, -0.0676367, 0.9411197)
 bones/13/position = Vector3(-5.138494e-10, 0.096125126, -0.057500005)
 bones/13/rotation = Quaternion(0.15571052, -0.18945536, 0.6702893, 0.7004093)
-bones/15/rotation = Quaternion(0.064146414, 0.13050728, 0.018395372, 0.98919904)
+bones/15/rotation = Quaternion(0.066641934, 0.1305039, 0.016791819, 0.9890631)
 bones/17/position = Vector3(0.17094505, 0.11358726, 1.3923275e-08)
-bones/17/rotation = Quaternion(0.9895965, 0.07585069, 0.04160208, 0.114955515)
-bones/18/rotation = Quaternion(0.45623237, 6.3502355e-08, -3.145815e-07, 0.8898607)
-bones/19/rotation = Quaternion(-0.6480887, -0.20794229, 0.07373383, 0.7289064)
-bones/20/rotation = Quaternion(-8.921188e-06, 0.9201106, -0.3916588, 1.9239146e-06)
-bones/21/rotation = Quaternion(0.9854245, -0.04094416, -0.013098046, 0.1645926)
-bones/22/rotation = Quaternion(0.4866354, -6.1892244e-08, 3.3613807e-07, 0.87360525)
-bones/23/rotation = Quaternion(-0.65600014, 0.10943085, -0.0379332, 0.74582165)
-bones/24/rotation = Quaternion(2.3140976e-06, 0.92011726, -0.39164296, -2.4075746e-08)
+bones/17/rotation = Quaternion(0.9900988, 0.07551702, 0.04135524, 0.11086678)
+bones/18/rotation = Quaternion(0.4453744, 6.6110516e-08, -3.040741e-07, 0.8953445)
+bones/19/rotation = Quaternion(-0.6423017, -0.20863467, 0.07157345, 0.7340282)
+bones/20/rotation = Quaternion(-8.921189e-06, 0.9201106, -0.3916589, 1.9239149e-06)
+bones/21/rotation = Quaternion(0.98609793, -0.040728927, -0.012953136, 0.16057485)
+bones/22/rotation = Quaternion(0.476467, -6.137734e-08, 3.3525038e-07, 0.87919235)
+bones/23/rotation = Quaternion(-0.6504052, 0.10976429, -0.03684718, 0.750711)
+bones/24/rotation = Quaternion(2.314098e-06, 0.92011726, -0.391643, -2.4075803e-08)
 bones/25/rotation = Quaternion(0.7071068, -2.2930234e-07, -4.605517e-08, 0.7071068)
 bones/26/rotation = Quaternion(-0.7071068, -7.052851e-08, -7.0528486e-08, 0.7071068)
 bones/27/position = Vector3(0.030839492, 0.38245776, -2.8668688e-15)
@@ -71,18 +87,18 @@ bones/36/position = Vector3(-6.3112755e-09, 0.16565004, 2.7069498e-09)
 bones/37/rotation = Quaternion(1, 3.7652574e-09, 1.9487908e-07, 7.4505815e-09)
 bones/39/position = Vector3(0.8398419, 0.7198659, -0.44755834)
 bones/39/rotation = Quaternion(-0.7071068, -7.279511e-08, -7.279509e-08, 0.7071068)
-bones/40/position = Vector3(0.34367588, 0.79741216, 0.3942972)
-bones/40/rotation = Quaternion(0.6305252, 0.07554213, 0.42972854, 0.64192283)
+bones/40/position = Vector3(0.34321344, 0.79987127, 0.39646554)
+bones/40/rotation = Quaternion(0.6283941, 0.074201815, 0.43393657, 0.64133775)
 bones/41/position = Vector3(-0.87740976, 1.0355499, -0.44755882)
 bones/41/rotation = Quaternion(-0.7071068, -7.279511e-08, -7.279509e-08, 0.7071068)
-bones/42/position = Vector3(-0.3625339, 0.8163693, 0.29296562)
-bones/42/rotation = Quaternion(-0.29245406, 0.22423907, 0.91798764, -0.14658172)
+bones/42/position = Vector3(-0.35930857, 0.81748354, 0.2907973)
+bones/42/rotation = Quaternion(-0.2969692, 0.22431219, 0.9163379, -0.14771001)
 
-[node name="Nagonford_Axe" parent="NagonfordSkin/Rig/Skeleton3D" index="0" unique_id=2067089249]
-transform = Transform3D(0.18764664, 0.8132758, 0.55079013, 0.6109546, 0.3424361, -0.713772, -0.76910406, 0.4704449, -0.4326183, -0.3152324, 0.68027735, 0.3639013)
+[node name="Nagonford_Axe" parent="NagonfordSkin/Rig/Skeleton3D" index="0" unique_id=312896464]
+transform = Transform3D(0.19161189, 0.8075569, 0.55779535, 0.61165285, 0.34621307, -0.711348, -0.7675701, 0.47748005, -0.42760643, -0.31074604, 0.68154275, 0.3621446)
 
-[node name="Nagonford_Cape" parent="NagonfordSkin/Rig/Skeleton3D" index="1" unique_id=1690137329]
-transform = Transform3D(0.96592575, 0.031580117, -0.25688517, -0.0176676, 0.9982582, 0.056287885, 0.2582153, -0.049831383, 0.9648013, 0.027919857, 1.1678448, -0.05632082)
+[node name="Nagonford_Cape" parent="NagonfordSkin/Rig/Skeleton3D" index="1" unique_id=2046086493]
+transform = Transform3D(0.9659259, 0.031580128, -0.25688517, -0.015600392, 0.99782735, 0.06400797, 0.25834844, -0.05781943, 0.96431994, 0.027919859, 1.1697533, -0.05826387)
 
 [node name="AnimationTree" parent="." index="2" unique_id=1749618123]
 root_node = NodePath("../NagonfordSkin")
