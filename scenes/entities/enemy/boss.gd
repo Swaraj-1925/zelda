@@ -5,7 +5,7 @@ const simple_attacks = {
 	'spin' : '2H_Melee_Attack_Spin',
 	'range': '1H_Melee_Attack_Stab'
 }
-@export var spin_speed := 6
+@export var spin_speed := 5.0
 var spining := false
 
 func _physics_process(delta: float) -> void:

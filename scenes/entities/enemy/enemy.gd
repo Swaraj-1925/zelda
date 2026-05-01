@@ -2,11 +2,11 @@ class_name Enemy
 extends CharacterBody3D
 
 @onready var player = get_tree().get_first_node_in_group("Player")
-@onready var boss_skin = get_node("BossSkin")
+#@onready var boss_skin = get_node("NagonfordSkin")
 @onready var move_state_machine =  $AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var attack_animation = $AnimationTree.get_tree_root().get_node("AttackAnimation")
 
-@export var walk_speed := 3.0
+@export var walk_speed := 2.0
 @export var notice_radius := 30.0
 @export var attack_radius := 3.0
 @export var speed = walk_speed

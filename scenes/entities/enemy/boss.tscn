@@ -63,7 +63,7 @@ radius = 4.0
 
 [node name="Boss" unique_id=1600863898 instance=ExtResource("1_m3bvw")]
 script = ExtResource("2_xbfx1")
-spin_speed = 6
+spin_speed = 4.0
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=1090327812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2414637, 0)
@@ -72,6 +72,9 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="NagonfordSkin" parent="." index="1" unique_id=1052558994 instance=ExtResource("2_2poyl")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.1369481, 1.4147205, 0)
+
+[node name="Nagonford_Axe" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1052558994, 1328204315) index="0" unique_id=1840731158]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0)
 
 [node name="AnimationTree" parent="." index="2" unique_id=1749618123]
 root_node = NodePath("../NagonfordSkin")
@@ -86,7 +89,7 @@ parameters/SpinBlend/blend_amount = 0.0
 [node name="AttackTimer" parent="Timers" parent_id_path=PackedInt32Array(1734382407) index="0" unique_id=1291631543]
 wait_time = 5.0
 
-[node name="Area3D" type="Area3D" parent="." index="5" unique_id=808386846]
+[node name="Area3D" type="Area3D" parent="." index="4" unique_id=808386846]
 collision_layer = 0
 collision_mask = 2
 

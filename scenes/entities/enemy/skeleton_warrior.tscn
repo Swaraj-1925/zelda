@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://damhcgsjclcw4"]
+
+[ext_resource type="PackedScene" uid="uid://chmpry8o2mgse" path="res://scenes/entities/enemy/skeleton_mage.tscn" id="1_v838y"]
+[ext_resource type="PackedScene" uid="uid://cp757r6txb0j6" path="res://graphics/weapons/sword_1handed.gltf" id="2_1r4tf"]
+[ext_resource type="Texture2D" uid="uid://cbf5176yt1e2d" path="res://graphics/weapons/barbarian_texture.png" id="3_i05hy"]
+[ext_resource type="Texture2D" uid="uid://nkjr5cjenbjb" path="res://graphics/characters/skeleton warrior/Skeleton_Warrior_skeleton_texture.png" id="4_liv4k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8kerc"]
+albedo_texture = ExtResource("3_i05hy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8spt8"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_186lv"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05it0"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mldag"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhljh"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_garsj"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08k5i"]
+albedo_texture = ExtResource("4_liv4k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_np1w0"]
+albedo_texture = ExtResource("4_liv4k")
+
+[node name="SkeletonWarrior" unique_id=1468805087 instance=ExtResource("1_v838y")]
+
+[node name="wand2" parent="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D" parent_id_path=PackedInt32Array(1806414304) index="0" unique_id=1544603162]
+visible = false
+
+[node name="sword_1handed2" parent="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D" parent_id_path=PackedInt32Array(1806414304) index="1" unique_id=1654105555 instance=ExtResource("2_1r4tf")]
+
+[node name="sword_1handed" parent="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D/sword_1handed2" index="0" unique_id=1148820845]
+surface_material_override/0 = SubResource("StandardMaterial3D_8kerc")
+
+[node name="Skeleton_Mage_Hat" parent="Skeleton_Mage/Rig/Skeleton3D/Skeleton_Mage_Hat" parent_id_path=PackedInt32Array(1433213938, 1448215521) index="0" unique_id=571920599]
+surface_material_override/0 = SubResource("StandardMaterial3D_8spt8")
+
+[node name="Skeleton_Mage_ArmLeft" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="2" unique_id=1837840379]
+surface_material_override/0 = SubResource("StandardMaterial3D_186lv")
+
+[node name="Skeleton_Mage_ArmRight" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="3" unique_id=854349179]
+surface_material_override/0 = SubResource("StandardMaterial3D_05it0")
+
+[node name="Skeleton_Mage_Body" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="4" unique_id=1741502258]
+surface_material_override/0 = SubResource("StandardMaterial3D_mldag")
+
+[node name="Skeleton_Mage_Eyes" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="5" unique_id=1154734301]
+surface_material_override/0 = SubResource("StandardMaterial3D_vhljh")
+
+[node name="Skeleton_Mage_Jaw" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="6" unique_id=1424705994]
+surface_material_override/0 = SubResource("StandardMaterial3D_garsj")
+
+[node name="Skeleton_Mage_LegLeft" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="7" unique_id=159748040]
+surface_material_override/0 = SubResource("StandardMaterial3D_08k5i")
+
+[node name="Skeleton_Mage_LegRight" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="8" unique_id=1827788966]
+surface_material_override/0 = SubResource("StandardMaterial3D_np1w0")
+
+[editable path="Skeleton_Mage"]
+[editable path="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D/wand2"]
+[editable path="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D/sword_1handed2"]

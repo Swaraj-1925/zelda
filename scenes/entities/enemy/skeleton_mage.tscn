@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://chmpry8o2mgse"]
+
+[ext_resource type="PackedScene" uid="uid://1div5m1lxp6s" path="res://scenes/entities/enemy/enemy.tscn" id="1_henmw"]
+[ext_resource type="Script" uid="uid://7s4buyqvj7wi" path="res://scenes/entities/enemy/skeleton_mage.gd" id="2_67tbe"]
+[ext_resource type="PackedScene" uid="uid://c16qxxd7mhpfp" path="res://graphics/characters/skeleton mage/Skeleton_Mage.glb" id="3_llarc"]
+[ext_resource type="PackedScene" uid="uid://02ix7c6cfe1u" path="res://graphics/weapons/wand.gltf" id="4_llarc"]
+[ext_resource type="Texture2D" uid="uid://cbf5176yt1e2d" path="res://graphics/weapons/barbarian_texture.png" id="5_k42kt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_llarc"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_llarc"]
+animation = &"Spellcast_Shoot"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_k42kt"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_henmw"]
+animation = &"Idle_B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_67tbe"]
+animation = &"Walking_B"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_llarc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k42kt"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hvuop"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vwftw"]
+states/Idle/node = SubResource("AnimationNodeAnimation_henmw")
+states/Idle/position = Vector2(291.6, 93.6)
+states/Start/position = Vector2(144.8, 93.6)
+states/Walk/node = SubResource("AnimationNodeAnimation_67tbe")
+states/Walk/position = Vector2(447.6, 93.28)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_llarc"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_k42kt"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hvuop")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gcgia"]
+graph_offset = Vector2(-245.57417, 8.644623)
+nodes/output/position = Vector2(400, 160)
+nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_vwftw")
+nodes/MoveStateMachine/position = Vector2(-224, 64)
+nodes/AttackAnimation/node = SubResource("AnimationNodeAnimation_llarc")
+nodes/AttackAnimation/position = Vector2(-208, 288)
+nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_k42kt")
+nodes/AttackOneShot/position = Vector2(48, 128)
+node_connections = [&"output", 0, &"AttackOneShot", &"AttackOneShot", 0, &"MoveStateMachine", &"AttackOneShot", 1, &"AttackAnimation"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvuop"]
+albedo_texture = ExtResource("5_k42kt")
+
+[node name="SkeletonMage" unique_id=1468805087 instance=ExtResource("1_henmw")]
+script = ExtResource("2_67tbe")
+walk_speed = 5.0
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1090327812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9764885, 0)
+shape = SubResource("CapsuleShape3D_llarc")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="AnimationTree" parent="." index="1" unique_id=1749618123]
+root_node = NodePath("../Skeleton_Mage")
+tree_root = SubResource("AnimationNodeBlendTree_gcgia")
+anim_player = NodePath("../Skeleton_Mage/AnimationPlayer")
+parameters/AttackOneShot/active = false
+parameters/AttackOneShot/internal_active = false
+parameters/AttackOneShot/request = 0
+
+[node name="AttackTimer" parent="Timers" parent_id_path=PackedInt32Array(1734382407) index="0" unique_id=1291631543]
+wait_time = 3.0
+
+[node name="Skeleton_Mage" parent="." index="3" unique_id=1433213938 instance=ExtResource("3_llarc")]
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Skeleton_Mage/Rig/Skeleton3D" parent_id_path=PackedInt32Array(1433213938, 1808028767) index="0" unique_id=1806414304]
+transform = Transform3D(-0.999999, 4.6839318e-07, 4.573103e-07, 3.9779994e-07, -5.8875344e-07, 0.99999946, 3.9761645e-07, 0.99999946, 5.358822e-07, -0.8831323, 1.0492611, -7.275953e-07)
+bone_name = "handslot.r"
+bone_idx = 13
+
+[node name="wand2" parent="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D" index="0" unique_id=1544603162 instance=ExtResource("4_llarc")]
+transform = Transform3D(1, -5.684342e-14, -4.791279e-15, 0, 1, 1.1368684e-13, 6.7245742e-15, 0, 1, 0, 0.021060698, 0.038201094)
+
+[node name="wand" parent="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D/wand2" index="0" unique_id=1286456301]
+surface_material_override/0 = SubResource("StandardMaterial3D_hvuop")
+
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
+
+[editable path="Skeleton_Mage"]
+[editable path="Skeleton_Mage/Rig/Skeleton3D/BoneAttachment3D/wand2"]
