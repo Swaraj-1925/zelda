@@ -18,7 +18,8 @@ extends CharacterBody3D
 var movment_input := Vector2.ZERO
 var weapon_active := true
 var speed_modifer := 1.0
-
+var last_direction := Vector2(0,1)
+signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
 func _ready() -> void:
 	skin.switch_weapon(weapon_active)
 var defend := false:
@@ -63,6 +64,8 @@ func move_logic(delta: float):
 		
 	velocity.x = vel.x
 	velocity.z = vel.y
+	if movment_input:
+		last_direction = movment_input
 func jump_logic(delta: float):
 	# this if statment make sure that no jump allowed when in the air can be modifed to be used for something like double jump
 	if is_on_floor(): 
@@ -93,7 +96,9 @@ func ability_logic():
 func hit():
 	skin.hit()
 	stop_movement(0.3,0.3)
-	
+
+func shoot_fireball(pos:Vector3) -> void:
+	cast_spell.emit('fireball',pos, last_direction,1.0)
 # stop player for brif moment
 func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()

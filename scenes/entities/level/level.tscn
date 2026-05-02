@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cogcp4l7iup8e"]
 
+[ext_resource type="Script" uid="uid://bamdqbnggtgxa" path="res://scenes/entities/level/level.gd" id="1_keppn"]
 [ext_resource type="PackedScene" uid="uid://dqebpbp6ixnjn" path="res://scenes/entities/player/player.tscn" id="1_xe1o8"]
 [ext_resource type="PackedScene" uid="uid://debjeajb0jp2l" path="res://scenes/entities/enemy/boss.tscn" id="2_ngi2h"]
 [ext_resource type="PackedScene" uid="uid://chmpry8o2mgse" path="res://scenes/entities/enemy/skeleton_mage.tscn" id="3_ftpb6"]
@@ -28,6 +29,7 @@ size = Vector3(10, 10, 1)
 size = Vector3(40, 0.5, 40)
 
 [node name="Level" type="Node3D" unique_id=98366865]
+script = ExtResource("1_keppn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1547060280]
 environment = SubResource("Environment_ngi2h")
@@ -46,9 +48,11 @@ visible = false
 
 [node name="SkeletonMage" parent="Entites" unique_id=1468805087 instance=ExtResource("3_ftpb6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.610534, 0, 7.9876204)
+visible = false
 
 [node name="SkeletonWarrior" parent="Entites" unique_id=1451039164 instance=ExtResource("4_to3wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9545584, 0, 7.139597)
+visible = false
 
 [node name="Environment" type="Node3D" parent="." unique_id=216971942]
 
@@ -69,3 +73,7 @@ size = Vector3(40, 0.5, 40)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D" unique_id=444295152]
 shape = SubResource("BoxShape3D_ngi2h")
+
+[node name="Projectiles" type="Node3D" parent="." unique_id=107857847]
+
+[connection signal="cast_spell" from="Entites/Player" to="." method="_on_player_cast_spell"]

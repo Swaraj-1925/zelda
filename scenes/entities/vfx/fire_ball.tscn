@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ct7dg17x2sogi"]
+
+[ext_resource type="Script" uid="uid://dmd2qhtb5gaod" path="res://scenes/entities/vfx/fire_ball.gd" id="1_5ak8e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_efh8o"]
+
+[node name="FireBall" type="Area3D" unique_id=788905030]
+script = ExtResource("1_5ak8e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1582546460]
+shape = SubResource("SphereShape3D_efh8o")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=916445109]
+radial_segments = 16
