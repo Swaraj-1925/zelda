@@ -22,7 +22,8 @@ func _on_attack_timer_timeout() -> void:
 		if rng.randi() % 2:
 			range_attack_animation()
 		else:
-			spin_attack_animation()
+			range_attack_animation()
+			#spin_attack_animation()
 
 func spin_attack_animation():
 	var tween = create_tween()
@@ -43,6 +44,12 @@ func range_attack_animation():
 	attack_animation.animation = simple_attacks['range']
 	$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
+func shoot_fireball():
+	var direction = (player.position - position).normalized()
+	var dir_2d = Vector2(direction.x,direction.z)
+	var pos = $NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe/Marker3D.global_position
+	cast_spell.emit('fireball',pos, dir_2d,3.0)
+	
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if spining:

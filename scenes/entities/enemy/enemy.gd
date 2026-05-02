@@ -11,7 +11,7 @@ extends CharacterBody3D
 @export var attack_radius := 3.0
 @export var speed = walk_speed
 var speed_modifer := 1.0
-
+signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
 
 
 var rng = RandomNumberGenerator.new()

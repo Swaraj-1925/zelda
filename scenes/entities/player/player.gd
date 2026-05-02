@@ -65,7 +65,7 @@ func move_logic(delta: float):
 	velocity.x = vel.x
 	velocity.z = vel.y
 	if movment_input:
-		last_direction = movment_input
+		last_direction = movment_input.normalized()
 func jump_logic(delta: float):
 	# this if statment make sure that no jump allowed when in the air can be modifed to be used for something like double jump
 	if is_on_floor(): 
