@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bamdqbnggtgxa" path="res://scenes/entities/level/level.gd" id="1_keppn"]
 [ext_resource type="PackedScene" uid="uid://dqebpbp6ixnjn" path="res://scenes/entities/player/player.tscn" id="1_xe1o8"]
 [ext_resource type="PackedScene" uid="uid://debjeajb0jp2l" path="res://scenes/entities/enemy/boss.tscn" id="3_ftpb6"]
+[ext_resource type="Texture2D" uid="uid://cemjcktenml74" path="res://graphics/grid/Orange/texture_08.png" id="4_keppn"]
+[ext_resource type="Texture2D" uid="uid://cpvvnhsk35iqn" path="res://graphics/grid/Green/texture_09.png" id="5_r25fv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d7dg5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,14 +19,21 @@ sky = SubResource("Sky_xe1o8")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ingja"]
+albedo_texture = ExtResource("4_keppn")
+
 [sub_resource type="BoxMesh" id="BoxMesh_xe1o8"]
+material = SubResource("StandardMaterial3D_ingja")
 size = Vector3(10, 10, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ftpb6"]
 size = Vector3(10, 10, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7kn6"]
+albedo_texture = ExtResource("5_r25fv")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ngi2h"]
-size = Vector3(40, 0.5, 40)
+size = Vector3(60, 0.5, 60)
 
 [node name="Level" type="Node3D" unique_id=98366865]
 script = ExtResource("1_keppn")
@@ -39,9 +48,10 @@ shadow_enabled = true
 [node name="Entites" type="Node3D" parent="." unique_id=1733927224]
 
 [node name="Player" parent="Entites" unique_id=288673589 groups=["Player"] instance=ExtResource("1_xe1o8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.361183, 0, -17.805353)
 
 [node name="Boss" parent="Entites" unique_id=1600863898 instance=ExtResource("3_ftpb6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.512497)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.895382, 0, 19.372574)
 
 [node name="Environment" type="Node3D" parent="." unique_id=216971942]
 
@@ -58,7 +68,8 @@ shape = SubResource("BoxShape3D_ftpb6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/StaticBody3D" unique_id=1061105498]
-size = Vector3(40, 0.5, 40)
+size = Vector3(60, 0.5, 60)
+material = SubResource("StandardMaterial3D_p7kn6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D" unique_id=444295152]
 shape = SubResource("BoxShape3D_ngi2h")

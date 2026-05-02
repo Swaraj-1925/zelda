@@ -16,14 +16,14 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	$Timers/AttackTimer.wait_time = rng.randf_range(4.0,5.5)
-	if position.distance_to(player.position) < 5.0:
-		melee_attack_animation()
-	else:
-		if rng.randi() % 2:
-			range_attack_animation()
+	if  position.distance_to(player.position) < 7.0:
+		if position.distance_to(player.position) < 5.0:
+			melee_attack_animation()
 		else:
-			range_attack_animation()
-			#spin_attack_animation()
+			if rng.randi() % 2:
+				range_attack_animation()
+			else:
+				spin_attack_animation()
 
 func spin_attack_animation():
 	var tween = create_tween()

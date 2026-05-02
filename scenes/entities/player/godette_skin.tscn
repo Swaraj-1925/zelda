@@ -124,7 +124,6 @@ transform = Transform3D(1.0000011, 0, 0, 0, 1.0000006, 0, 0, 0, 1.0000006, 0.024
 surface_material_override/0 = SubResource("StandardMaterial3D_m6bsd")
 
 [node name="Sword" parent="Rig/Skeleton3D/RightHandSlot" index="1" unique_id=1487325460 instance=ExtResource("6_w65gf")]
-visible = false
 
 [node name="Marker3D" type="Marker3D" parent="Rig/Skeleton3D/RightHandSlot" index="2" unique_id=69310559]
 transform = Transform3D(1, -5.684342e-14, -1.875049e-14, -5.684342e-14, 1.0000001, -2.9802322e-08, 6.724547e-15, 2.9802493e-08, 1.0000001, 0.008296788, 0.69011563, 0.00575912)
