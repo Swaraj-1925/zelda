@@ -16,9 +16,11 @@ extends CharacterBody3D
 @onready var skin = $GodetteSkin
 
 var movment_input := Vector2.ZERO
-var weapon_active := false
+var weapon_active := true
 var speed_modifer := 1.0
 
+func _ready() -> void:
+	skin.switch_weapon(weapon_active)
 var defend := false:
 	set(value):
 		if not defend and value:

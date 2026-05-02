@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bmd8ohwi7nb7u"]
+
+[ext_resource type="PackedScene" uid="uid://cqxi7o0pyi1mt" path="res://graphics/weapons/bone.gltf.glb" id="1_dy73d"]
+[ext_resource type="Script" uid="uid://dy3e6lvj570vr" path="res://scenes/entities/weapons/bone.gd" id="1_mf104"]
+
+[node name="Bone" type="Node3D" unique_id=707702075]
+script = ExtResource("1_mf104")
+
+[node name="bone_gltf" parent="." unique_id=1367112631 instance=ExtResource("1_dy73d")]
+
+[node name="bone" parent="bone_gltf" index="0" unique_id=1592763794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4428534, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1025547867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011197269, 0.016483784, 0)
+target_position = Vector3(0, 0.9, 0)
+collision_mask = 2
+
+[editable path="bone_gltf"]

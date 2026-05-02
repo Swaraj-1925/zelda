@@ -37,3 +37,10 @@ func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()
 	tween.tween_property(self, "speed_modifer", 0.0, start_duration) # In 0.3 seconds, speed goes from 1.0 → 0.0
 	tween.tween_property(self, "speed_modifer", 1.0, end_duration)	 # In 0.8 seconds, speed goes from 0.0 → 1.0
+	
+func hit():
+	if not $Timers/InvulTimer.time_left:
+		print("enemy hit")
+		$Timers/InvulTimer.start()
+
+ 

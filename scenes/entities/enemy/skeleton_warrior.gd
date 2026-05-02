@@ -14,3 +14,6 @@ func _on_attack_timer_timeout() -> void:
 
 func spell_cast_animation():
 	$AnimationTree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func can_damage(value:bool):
+	$Skeleton_Warrior/Rig/Skeleton3D/BoneAttachment3D/Bone.can_damage = value
