@@ -14,14 +14,23 @@ extends CharacterBody3D
 
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $GodetteSkin
-
+@onready var ui = $UI	
 var movment_input := Vector2.ZERO
 var weapon_active := true
 var speed_modifer := 1.0
 var last_direction := Vector2(0,1)
+var health := 5:
+	set(value):
+		ui.update_heart(value, value - health)
+		health = value
+
 signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
+
+
 func _ready() -> void:
 	skin.switch_weapon(weapon_active)
+	ui.setup(health)
+	
 var defend := false:
 	set(value):
 		if not defend and value:
@@ -94,8 +103,11 @@ func ability_logic():
 		
 
 func hit():
-	skin.hit()
-	stop_movement(0.3,0.3)
+	if not $Timers/InvulTimer.time_left:
+		skin.hit()
+		stop_movement(0.3,0.3)
+		health -= 1
+		$Timers/InvulTimer.start()
 
 func shoot_fireball(pos:Vector3) -> void:
 	cast_spell.emit('fireball',pos, last_direction,1.0)

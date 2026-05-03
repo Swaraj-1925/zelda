@@ -42,7 +42,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3xkvp"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_m3bvw"]
-graph_offset = Vector2(-474.0922, -31.805836)
+graph_offset = Vector2(-277.83228, -92.987465)
 nodes/output/position = Vector2(512, 176)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_q043c")
 nodes/MoveStateMachine/position = Vector2(-528, 32)
@@ -70,19 +70,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2414637, 0)
 shape = SubResource("CapsuleShape3D_xbfx1")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="NagonfordSkin" parent="." index="1" unique_id=1052558994 instance=ExtResource("2_2poyl")]
+[node name="NagonfordSkin" parent="." index="1" unique_id=1442240328 instance=ExtResource("2_2poyl")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.1369481, 1.4147205, 0)
 
-[node name="Nagonford_Axe" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1052558994, 1178020831) index="0" unique_id=967282993]
+[node name="Nagonford_Axe" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1442240328, 222544037) index="0" unique_id=1474381456]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1052558994, 1178020831) index="1" unique_id=1880657017]
+[node name="RayCast3D" type="RayCast3D" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1442240328, 222544037) index="1" unique_id=1880657017]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0)
 target_position = Vector3(0, 1.31, 0)
 collision_mask = 2
 
-[node name="Marker3D" type="Marker3D" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1052558994, 1178020831) index="2" unique_id=185837338]
+[node name="Marker3D" type="Marker3D" parent="NagonfordSkin/Rig/Skeleton3D/Nagonford_Axe" parent_id_path=PackedInt32Array(1442240328, 222544037) index="2" unique_id=185837338]
 transform = Transform3D(1.0000001, 9.947598e-14, -2.6716056e-13, -1.1368684e-13, 1, 0, 1.6789514e-14, 2.842171e-13, 1, 5.9604645e-08, 1.0942285, 0.6344583)
+
+[node name="AnimationPlayer" parent="NagonfordSkin" index="1" unique_id=1394298911]
+active = false
+autoplay = &"2H_Melee_Idle"
 
 [node name="AnimationTree" parent="." index="2" unique_id=1749618123]
 root_node = NodePath("../NagonfordSkin")

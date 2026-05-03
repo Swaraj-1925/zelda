@@ -15,6 +15,8 @@ signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
 
 
 var rng = RandomNumberGenerator.new()
+func _ready() -> void:
+	move_state_machine.travel("Idle")
 func move_to_player(delta):
 	if position.distance_to(player.position) < notice_radius:
 		# this gives a normlized diffrence between player postion and current enemy postion
