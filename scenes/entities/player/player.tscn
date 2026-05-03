@@ -30,3 +30,14 @@ transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90
 [node name="InvulTimer" type="Timer" parent="Timers" unique_id=835577488]
 wait_time = 0.8
 one_shot = true
+
+[node name="EnergyRecoveryTimer" type="Timer" parent="Timers" unique_id=766932493]
+wait_time = 0.2
+autostart = true
+
+[node name="StaminaRecoverTimer" type="Timer" parent="Timers" unique_id=1425092114]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]
+[connection signal="timeout" from="Timers/StaminaRecoverTimer" to="." method="_on_stamina_recover_timer_timeout"]

@@ -31,6 +31,23 @@ var health := 5:
 	set(value):
 		ui.update_heart(value, value - health)
 		health = value
+		if health <= 0:
+			get_tree().quit()
+
+var energy = 100:
+	set(value):
+		energy = clamp(value,0,100) 
+		ui.update_energy(energy)
+
+var stamina = 100:
+	set(value):
+		ui.update_stamina(stamina, value)
+		if stamina == 100 and value < 100:
+			ui.change_stamina_alpha(1.0)
+		if value == 100:
+			ui.change_stamina_alpha(0.0)
+		stamina = clamp(value,0,100)
+		
 
 signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
 
@@ -55,8 +72,6 @@ func  _physics_process(delta: float) -> void:
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
-	if Input.is_action_just_pressed('ui_accept'):
-		hit()
 	move_and_slide()
 	
 func move_logic(delta: float):
@@ -90,8 +105,9 @@ func move_logic(delta: float):
 func jump_logic(delta: float):
 	# this if statment make sure that no jump allowed when in the air can be modifed to be used for something like double jump
 	if is_on_floor(): 
-		if Input.is_action_just_pressed("Space"):
+		if Input.is_action_just_pressed("Space") and stamina >= 20:
 			velocity.y = -jump_velocity
+			stamina -= 20
 	else:
 		# play animation if player is falling 
 		skin.set_state_machine('Jump_Idle' )
@@ -104,8 +120,10 @@ func ability_logic():
 		if weapon_active:
 			skin.attack()
 		else:
-			skin.cast_spell()
-			stop_movement(0.3, 0.3)
+			if energy >= 20:
+				skin.cast_spell()
+				stop_movement(0.3, 0.3)
+				energy -= 20
 	defend = Input.is_action_pressed('RMB')
 	
 	if Input.is_action_just_pressed("Scroll Up") and not skin.attacking:
@@ -137,3 +155,11 @@ func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()
 	tween.tween_property(self, "speed_modifer", 0.0, start_duration) # In 0.3 seconds, speed goes from 1.0 → 0.0
 	tween.tween_property(self, "speed_modifer", 1.0, end_duration)	 # In 0.8 seconds, speed goes from 0.0 → 1.0
+
+
+func _on_energy_recovery_timer_timeout() -> void:
+	energy += 1
+
+
+func _on_stamina_recover_timer_timeout() -> void:
+	stamina += 1
