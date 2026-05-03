@@ -46,8 +46,11 @@ func cast_spell():
 	if not attacking:
 		extra_animation_node.animation = 'Spellcast_Shoot'
 		$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-func shoot_fireball():
-	get_parent().shoot_fireball($Rig/Skeleton3D/RightHandSlot/Marker3D.global_position)
+		
+func shoot_magic():
+	get_parent().shoot_magic($Rig/Skeleton3D/RightHandSlot/Marker3D.global_position)
+	
+	
 func hit():
 	extra_animation_node.animation = 'Hit_A'
 	$AnimationTree.set("parameters/ExtraOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

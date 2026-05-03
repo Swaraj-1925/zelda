@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://duvdrgqondlvv"]
 
 [ext_resource type="Script" uid="uid://d35tve8jft8ug" path="res://scenes/entities/player/ui.gd" id="1_t1uvp"]
+[ext_resource type="Texture2D" uid="uid://3vh0pug1ilge" path="res://graphics/ui/fire.png" id="2_rgxe2"]
 
 [node name="UI" type="Control" unique_id=1633406177]
 layout_mode = 3
@@ -25,3 +26,26 @@ theme_override_constants/margin_top = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Heart/MarginContainer" unique_id=1816839915]
 layout_mode = 2
+
+[node name="Spell" type="Control" parent="." unique_id=912714267]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Spell" unique_id=662010459]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 40.0
+offset_bottom = 39.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="TextureRect" type="TextureRect" parent="Spell/MarginContainer" unique_id=561929871]
+layout_mode = 2
+texture = ExtResource("2_rgxe2")
+expand_mode = 2
+stretch_mode = 4

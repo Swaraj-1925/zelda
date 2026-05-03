@@ -14,9 +14,17 @@ extends CharacterBody3D
 
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $GodetteSkin
-@onready var ui = $UI	
+@onready var ui = $UI
+
 var movment_input := Vector2.ZERO
-var weapon_active := true
+var weapon_active := true:
+	set(value):
+		weapon_active = value
+		if weapon_active:
+			ui.get_node("Spell").hide()
+		else:
+			ui.get_node("Spell").show()
+			
 var speed_modifer := 1.0
 var last_direction := Vector2(0,1)
 var health := 5:
@@ -26,8 +34,12 @@ var health := 5:
 
 signal cast_spell(type:String, pos: Vector3, direction: Vector2, size: float)
 
+enum spells {FIREBALL, HEAL}
+var current_spell = spells.FIREBALL
 
+ 
 func _ready() -> void:
+	weapon_active = true
 	skin.switch_weapon(weapon_active)
 	ui.setup(health)
 	
@@ -98,8 +110,14 @@ func ability_logic():
 	
 	if Input.is_action_just_pressed("Scroll Up") and not skin.attacking:
 		weapon_active = not weapon_active
-		print("Scrolled up")
 		skin.switch_weapon(weapon_active)
+	if Input.is_action_just_pressed("1") and not skin.attacking:
+		current_spell = spells[
+			spells.keys()[
+				(int(current_spell) + 1) % len(spells)
+			]
+		]
+		ui.update_spell(spells,current_spell)
 		
 
 func hit():
@@ -109,8 +127,11 @@ func hit():
 		health -= 1
 		$Timers/InvulTimer.start()
 
-func shoot_fireball(pos:Vector3) -> void:
-	cast_spell.emit('fireball',pos, last_direction,1.0)
+func shoot_magic(pos:Vector3) -> void:
+	if current_spell == spells.FIREBALL:
+		cast_spell.emit('fireball',pos, last_direction,1.0)
+	if current_spell == spells.HEAL:
+		health += 1
 # stop player for brif moment
 func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()
